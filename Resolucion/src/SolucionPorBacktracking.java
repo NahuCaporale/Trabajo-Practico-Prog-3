@@ -11,9 +11,11 @@ public class SolucionPorBacktracking {
     //podría haber propuesto una secuencia [M3 - M3 - M3]
     private List<String> solucion;
     private Integer puestasEnFunc;
+    private int estadosGenerados;
 
     public SolucionPorBacktracking() {
         fabrica = new Fabrica();
+        estadosGenerados = 0;
         puestasEnFunc = 0;
         solucion = new ArrayList<>();
     }
@@ -24,16 +26,17 @@ public class SolucionPorBacktracking {
         List<Maquina> maquinas = fabrica.getMaquinas();
 
 
-        backtracking(null, maquinas, new ArrayList<>(), 0, cantPiezas);
+        backtracking(null, maquinas, new ArrayList<>(), 0, cantPiezas, 0);
         Map<List<String>, Integer> solucionA = new HashMap<>();
         return solucion;
     }
 
-    private void backtracking(Maquina actual, List<Maquina> maquinas, List<String> solucionParcial, int parcialCompletado, int total) {
+    private void backtracking(Maquina actual, List<Maquina> maquinas, List<String> solucionParcial, int parcialCompletado, int total, int puestas) {
         if (parcialCompletado == total) {
             if (solucion.isEmpty() || solucionParcial.size() <= solucion.size()) {
                 solucion.clear();
                 solucion.addAll(solucionParcial);
+                puestasEnFunc = puestas;
             }
             return;
         }
@@ -47,13 +50,14 @@ public class SolucionPorBacktracking {
         Iterator<Maquina> totalMaquinas = maquinas.iterator();
         while (totalMaquinas.hasNext()) {
             actual = totalMaquinas.next();
-
+            estadosGenerados++;
             //asigno
             asignarMaquina(actual, actual.getMaxPiezas(), total, solucionParcial);
             parcialCompletado += actual.getMaxPiezas();
+            puestas += 1;
             //recursividad
-            backtracking(actual, maquinas, solucionParcial, parcialCompletado, total);
-
+            backtracking(actual, maquinas, solucionParcial, parcialCompletado, total, puestas);
+            puestas -= 1;
             //desasigno
             desasignarMaquina(actual, actual.getMaxPiezas());
             solucionParcial.remove(actual.getMaquinaId());
@@ -70,9 +74,25 @@ public class SolucionPorBacktracking {
         listaParcial.add(actual.getMaquinaId());
     }
 
+    public int getEstadosGenerados() {
+        return estadosGenerados;
+    }
+
+    public void setEstadosGenerados(int estadosGenerados) {
+        this.estadosGenerados = estadosGenerados;
+    }
+
+    public Integer getPuestasEnFunc() {
+        return puestasEnFunc;
+    }
+
+    public void setPuestasEnFunc(Integer puestasEnFunc) {
+        this.puestasEnFunc = puestasEnFunc;
+    }
+
     @Override
     public String toString() {
         return "Tecnica: Backtracking" + "\n" + "Solucion Obtenida: " + solucion + "\n" + "Puestas en funcionamiento: "
-                + puestasEnFunc;
+                + getPuestasEnFunc() + "\nEstados generados " + getEstadosGenerados();
     }
 }
