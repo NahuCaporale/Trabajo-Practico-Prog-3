@@ -2,17 +2,22 @@ import java.util.*;
 
 public class SolucionPorBacktracking {
     Fabrica fabrica;
-    //Dado un número determinado de piezas a producir se desea encontrar, de existir, la secuencia de
-    //máquinas que se deben usar para minimizar la cantidad de puestas en funcionamiento totales
-    //requeridas para completar la producción.
-    //Por ejemplo, suponiendo las siguientes máquinas con la cantidad de piezas que produce cada una:
-    //(M1, 7), (M2, 3), (M3, 4), (M4, 1)
-    //Si necesitamos producir 12 piezas una configuración óptima posible sería [M1 - M3 - M4]. También se
-    //podría haber propuesto una secuencia [M3 - M3 - M3]
     private List<String> solucion;
     private Integer puestasEnFunc;
     private int estadosGenerados;
 
+    /*
+     * <<Breve explicación de la estrategia de resolución. Por ejemplo:
+     * - El arbol de exploracion se genera a partir de la primera maquina que fue insertada, prueba con esa sola si se completa
+     * con la cantidad que esa maquina puede producir termina, sino sigue explorando con otras opciones.
+     * - Un estado final es aquella suma parcial de piezas producidas en cada llamado recursivo
+     *    es igual a la cantidad total que se quiere producir.
+     *  El estado solucion es aquel que cumple con el estado final y ademas utiliza menos cantidad de maquinas.
+     * - Una poda que implementamos es cuando el parcial de piezas que se viene produciendo se pasa de la cantidad total que se
+     * producir(no queremso producir mas de lo que necesitamos).
+     * -Otra poda que implementamos es la de checkear en cada iteracion si la cantidad de el arreglo en cada llamado recursivo
+     * es mayor a la mejor solucion que tenemos, siempre y cuando tengamos ya una solucion.
+     */
     public SolucionPorBacktracking() {
         fabrica = new Fabrica();
         estadosGenerados = 0;
