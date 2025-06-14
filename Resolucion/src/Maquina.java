@@ -51,7 +51,7 @@ public class Maquina {
         piezas.add(cantPiezas);
     }
 
-    public void desasignarPiezas(int total) {
+    public void desasignarPiezas() {
         piezas.remove(this.piezas.size() - 1);
     }
 

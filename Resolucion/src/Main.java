@@ -33,22 +33,16 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException("No se pudo leer el archivo de configuracion", e);
         }
-
-
-        SolucionPorBacktracking solucionador = new SolucionPorBacktracking();
-        solucionador.fabrica = fabrica; // Establecer la fábrica en el solucionador
-
-        // Supongamos que queremos producir exactamente 12 piezas
-        int piezasRequeridas = 100;
-       List<String> mejorConfiguracion = solucionador.generarSolucionBacktracking(piezasTotales);
-
-        // Imprimir la solución
-        if (!mejorConfiguracion.isEmpty()) {
-            System.out.printf(solucionador.toString());
+        SolucionBacktracking backtrack = new SolucionBacktracking(fabrica);
+        Solucion sol = backtrack.generarSolucionBacktracking(piezasTotales);
+        if (sol != null) {
+            System.out.println(sol.toString());
         } else {
-            System.out.printf("No fue posible producir " + piezasRequeridas + " piezas con las máquinas disponibles");
+            System.out.println("No se encontro una solucion viable para producir " + piezasTotales + " piezas");
         }
 
     }
+
 }
+
 
