@@ -27,11 +27,10 @@ public class SolucionPorGreedy {
         List<String> solucionP = new ArrayList<>();
         int i = 0;
         int puestas = 0;
-        while (!esSolucion(piezas, cantidadProducida) && piezas >= 0) {
+        while (i < candidatos.size() && !esSolucion(piezas, cantidadProducida) && piezas >= 0) {
             Maquina c = seleccionarCandidato(candidatos, i);
             if (c != null) {
                 candidatosCon++;
-
                 if (Factibilidad(c, piezas, cantidadProducida)) {
                     solucionP.add(c.getMaquinaId());
                     cantidadProducida += c.getMaxPiezas();
