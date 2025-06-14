@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Maquina {
+public class Maquina implements Comparable<Maquina> {
     int maxPiezas;
     List<Integer> piezas;
     String maquinaId;
@@ -56,4 +56,8 @@ public class Maquina {
     }
 
 
+    @Override
+    public int compareTo(Maquina o) {
+        return o.maxPiezas - this.maxPiezas;
+    }
 }

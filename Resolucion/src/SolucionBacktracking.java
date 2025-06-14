@@ -16,7 +16,7 @@ public class SolucionBacktracking {
      */
     Fabrica fabrica;
     int contadorEstados;
-    Solucion solucion;
+    SolucionBacktrack solucion;
 
     public SolucionBacktracking(Fabrica fabrica) {
         this.fabrica = fabrica;
@@ -38,7 +38,7 @@ public class SolucionBacktracking {
         // Caso base: encontramos una solución.
         if (parcialCompletado == total) {
             if (solucion == null) {
-                solucion = new Solucion();// no funcionaba sin hacer new de solucion.
+                solucion = new SolucionBacktrack();// no funcionaba sin hacer new de solucion.
                 solucion.copiar(solucionParcial, parcialCompletado, puestas, contadorEstados);
             } else if (solucionParcial.size() < solucion.getMaquinas().size()) {
                 solucion.copiar(solucionParcial, parcialCompletado, puestas, contadorEstados);
@@ -80,10 +80,12 @@ public class SolucionBacktracking {
 
     private void desasignarMaquina(Maquina actual) {
         actual.desasignarPiezas();
+        actual.desactivarMaquina();
     }
 
     public void asignarMaquina(Maquina actual, int producido) {
         actual.asignarPiezas(producido);
+        actual.activarMaquina();
     }
 }
 

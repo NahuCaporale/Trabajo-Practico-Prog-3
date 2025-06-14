@@ -38,7 +38,14 @@ public class Main {
         if (sol != null) {
             System.out.println(sol.toString());
         } else {
-            System.out.println("No se encontro una solucion viable para producir " + piezasTotales + " piezas");
+            System.out.println("Solucion backtrack : No se encontro una solucion viable para producir " + piezasTotales + " piezas");
+        }
+        SolucionPorGreedy greedy = new SolucionPorGreedy(fabrica);
+        Solucion gree = greedy.generarSolucionGreedy(piezasTotales);
+        if (gree != null) {
+            System.out.println(gree.toString());
+        } else {
+            System.out.println("Solucion greedy : No se encontro una solucion viable para producir " + piezasTotales + " piezas");
         }
 
     }

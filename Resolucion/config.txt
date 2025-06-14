@@ -1,4 +1,4 @@
-PiezasTotales:
+PiezasTotales: 0
 
 M1,7
 M2,3
