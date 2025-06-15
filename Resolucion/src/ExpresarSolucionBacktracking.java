@@ -1,13 +1,13 @@
 import java.util.List;
 
-public class SolucionBacktrack extends Solucion {
+public class ExpresarSolucionBacktracking extends Solucion {
     private int estadosGenerados;
 
-    public SolucionBacktrack() {
+    public ExpresarSolucionBacktracking() {
         this.estadosGenerados = 0;
     }
 
-    public SolucionBacktrack(List<String> maquinasUsadas, int piezasProd, int puestas, int estados) {
+    public ExpresarSolucionBacktracking(List<String> maquinasUsadas, int piezasProd, int puestas, int estados) {
         super(maquinasUsadas, piezasProd, puestas);
         this.estadosGenerados = estados;
     }

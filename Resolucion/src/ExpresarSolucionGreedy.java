@@ -1,13 +1,13 @@
 import java.util.List;
 
-public class SolucionGreedy extends Solucion {
+public class ExpresarSolucionGreedy extends Solucion {
     int candidatosConsiderados;
 
-    public SolucionGreedy() {
+    public ExpresarSolucionGreedy() {
         this.candidatosConsiderados = 0;
     }
 
-    public SolucionGreedy(List<String> maquinasUsadas, int piezasProd, int puestas, int candidatos) {
+    public ExpresarSolucionGreedy(List<String> maquinasUsadas, int piezasProd, int puestas, int candidatos) {
         super(maquinasUsadas, piezasProd, puestas);
         this.candidatosConsiderados = candidatos;
     }

@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class SolucionPorGreedy {
-    SolucionGreedy solucion;
+    ExpresarSolucionGreedy solucion;
     int candidatosCon;
     Fabrica fabrica;
 
@@ -44,7 +44,7 @@ public class SolucionPorGreedy {
 
         }
         if (esSolucion(piezas, cantidadProducida)) {
-            solucion = new SolucionGreedy();
+            solucion = new ExpresarSolucionGreedy();
             solucion.copiar(solucionP, cantidadProducida, puestas, candidatosCon);
             return solucion;
         }

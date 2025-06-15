@@ -15,24 +15,22 @@ public class Main {
         try (BufferedReader texto = new BufferedReader(new FileReader(archivo))) {
             String linea;
             while ((linea = texto.readLine()) != null) {
-                // Ejemplo: Extraer PiezasTotales
                 if (linea.startsWith("PiezasTotales")) {
-                    String[] partes = linea.split(":");
-                    piezasTotales = Integer.parseInt(partes[1].trim());
+                    String[] partes = linea.split(":");//partes[0] "PiezasTotales"
+                    piezasTotales = Integer.parseInt(partes[1].trim());//int
                 }
-                // Ejemplo: Extraer datos de las máquinas
                 else if (linea.startsWith("M")) {
-                    // Formato esperado: Maquina 1,7
                     String[] partes = linea.split(",");
 
-                    String id = (partes[0]);
-                    int piezas = Integer.parseInt(partes[1]);
+                    String id = (partes[0]);//por ej: "m1"
+                    int piezas = Integer.parseInt(partes[1]);//lo que produce
                     fabrica.addMaquina(new Maquina(id, piezas, false));
                 }
             }
         } catch (IOException e) {
             throw new RuntimeException("No se pudo leer el archivo de configuracion", e);
         }
+        //RESULTADO DEL BACKTRACKING
         SolucionBacktracking backtrack = new SolucionBacktracking(fabrica);
         Solucion sol = backtrack.generarSolucionBacktracking(piezasTotales);
         if (sol != null) {
@@ -40,6 +38,7 @@ public class Main {
         } else {
             System.out.println("Solucion backtrack : No se encontro una solucion viable para producir " + piezasTotales + " piezas");
         }
+        //RESULTADO DEL GREEDY
         SolucionPorGreedy greedy = new SolucionPorGreedy(fabrica);
         Solucion gree = greedy.generarSolucionGreedy(piezasTotales);
         if (gree != null) {
